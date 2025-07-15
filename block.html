@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mindful Moment - Take a Breath</title>
+    <link rel="stylesheet" href="block.css">
+</head>
+<body>
+<div class="container">
+    <!-- Animated Background -->
+    <div class="bg-animation">
+        <div class="floating-shapes">
+            <div class="shape shape-1"></div>
+            <div class="shape shape-2"></div>
+            <div class="shape shape-3"></div>
+            <div class="shape shape-4"></div>
+            <div class="shape shape-5"></div>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="content">
+        <!-- Header -->
+        <header class="header">
+            <div class="logo">
+                <span class="logo-icon">🧘</span>
+                <h1>Mindful Moment</h1>
+            </div>
+            <div class="streak-info">
+                <span class="streak-icon">🔥</span>
+                <span class="streak-count" id="streakCount">Loading...</span>
+            </div>
+        </header>
+
+        <!-- Main Message -->
+        <main class="main-content">
+            <div class="message-container">
+                <div class="pause-icon">⏸️</div>
+                <h2 class="main-message">Take a mindful pause</h2>
+                <p class="sub-message">
+                    You were about to visit a site that might distract you from what truly matters.
+                    Let's take a moment to breathe and refocus.
+                </p>
+            </div>
+
+            <!-- Quote Section -->
+            <div class="quote-section">
+                <div class="quote-container">
+                    <blockquote class="quote-text" id="quoteText">
+                        "The present moment is the only time over which we have dominion."
+                    </blockquote>
+                    <cite class="quote-author" id="quoteAuthor">- Thich Nhat Hanh</cite>
+                </div>
+                <button class="new-quote-btn" id="newQuoteBtn">
+                    <span>✨</span> New Quote
+                </button>
+            </div>
+
+            <!-- Mindfulness Exercise -->
+            <div class="exercise-section">
+                <h3 class="exercise-title">Quick Mindfulness Exercise</h3>
+                <div class="exercise-content">
+                    <div class="breathing-guide">
+                        <div class="breath-circle" id="breathCircle"></div>
+                        <div class="breath-text" id="breathText">Take a deep breath</div>
+                    </div>
+                    <div class="exercise-steps">
+                        <div class="step" id="step1">
+                            <span class="step-number">1</span>
+                            <span class="step-text">Notice your breath</span>
+                        </div>
+                        <div class="step" id="step2">
+                            <span class="step-number">2</span>
+                            <span class="step-text">Feel your feet on the ground</span>
+                        </div>
+                        <div class="step" id="step3">
+                            <span class="step-number">3</span>
+                            <span class="step-text">Observe your thoughts without judgment</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Intention Setting -->
+            <div class="intention-section">
+                <h3 class="intention-title">Set Your Intention</h3>
+                <div class="intention-content">
+                    <p class="intention-question">What do you want to focus on right now?</p>
+                    <div class="intention-options">
+                        <button class="intention-btn" data-intention="work">
+                            <span class="intention-icon">💼</span>
+                            <span>Focus on work</span>
+                        </button>
+                        <button class="intention-btn" data-intention="learn">
+                            <span class="intention-icon">📚</span>
+                            <span>Learn something new</span>
+                        </button>
+                        <button class="intention-btn" data-intention="connect">
+                            <span class="intention-icon">💝</span>
+                            <span>Connect with loved ones</span>
+                        </button>
+                        <button class="intention-btn" data-intention="rest">
+                            <span class="intention-icon">🌙</span>
+                            <span>Take a break</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Action Buttons -->
+            <div class="action-section">
+                <div class="action-buttons">
+                    <button class="action-btn continue-btn" id="continueBtn">
+                        <span>🚀</span>
+                        Continue with Intention
+                    </button>
+                    <button class="action-btn meditate-btn" id="meditateBtn">
+                        <span>🧘‍♀️</span>
+                        5-Minute Meditation
+                    </button>
+                </div>
+            </div>
+
+            <!-- Statistics -->
+            <div class="stats-section">
+                <div class="stat-card">
+                    <div class="stat-number" id="todayBlocks">0</div>
+                    <div class="stat-label">Mindful pauses today</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number" id="timeSaved">0</div>
+                    <div class="stat-label">Minutes saved</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number" id="streakDays">0</div>
+                    <div class="stat-label">Day streak</div>
+                </div>
+            </div>
+        </main>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <div class="footer-content">
+                <p>Building healthier digital habits, one pause at a time ✨</p>
+                <div class="footer-links">
+                    <button class="footer-btn" id="settingsBtn">Settings</button>
+                    <button class="footer-btn" id="disableBtn">Disable for 10 mins</button>
+                </div>
+            </div>
+        </footer>
+    </div>
+</div>
+
+<!-- Meditation Modal -->
+<div class="modal" id="meditationModal">
+    <div class="modal-content">
+        <span class="modal-close" id="closeModal">&times;</span>
+        <h3>5-Minute Meditation</h3>
+        <div class="meditation-container">
+            <div class="meditation-timer" id="meditationTimer">5:00</div>
+            <div class="meditation-instructions" id="meditationInstructions">
+                Close your eyes and focus on your breath
+            </div>
+            <div class="meditation-progress">
+                <div class="meditation-progress-bar" id="meditationProgress"></div>
+            </div>
+            <button class="meditation-start-btn" id="startMeditationBtn">Start</button>
+        </div>
+    </div>
+</div>
+
+<script src="block.js"></script>
+</body>
+</html>
