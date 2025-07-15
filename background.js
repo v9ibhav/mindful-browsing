@@ -68,76 +68,74 @@ class StreakManager {
 const streakManager = new StreakManager();
 
 // Extension installation handler
-chrome.runtime.onInstalled.addListener(async (details) => {
+chrome.runtime.onInstalled.addListener((details) => {
     if (details.reason === 'install') {
-        // Set up default settings
-        await chrome.storage.local.set({
+        chrome.storage.local.set({
             extension_enabled: true,
             first_install: true,
             install_date: Date.now()
-        });
-
-        // Initialize streak
-        await streakManager.updateStreak();
-
-        console.log('Mindful Browsing Extension installed successfully');
+        }).then(() => {
+            return streakManager.updateStreak();
+        }).then(() => {
+            console.log('Mindful Browsing Extension installed successfully');
+        }).catch(console.error);
     }
 });
 
 // Listen for messages from popup and blocked pages
-chrome.runtime.onMessage.addListener(async (request, sender, sendResponse) => {
-    try {
-        switch (request.action) {
-            case 'getStreak':
-                const streak = await streakManager.getStreak();
-                sendResponse({ success: true, streak });
-                break;
+chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
+    (async () => {
+        try {
+            switch (request.action) {
+                case 'getStreak':
+                    const streak = await streakManager.getStreak();
+                    sendResponse({ success: true, streak });
+                    break;
 
-            case 'recordBlockedVisit':
-                const updatedStreak = await streakManager.recordBlockedVisit();
-                sendResponse({ success: true, streak: updatedStreak });
-                break;
+                case 'recordBlockedVisit':
+                    const updatedStreak = await streakManager.recordBlockedVisit();
+                    sendResponse({ success: true, streak: updatedStreak });
+                    break;
 
-            case 'resetStreak':
-                const resetStreak = await streakManager.resetStreak();
-                sendResponse({ success: true, streak: resetStreak });
-                break;
+                case 'resetStreak':
+                    const resetStreak = await streakManager.resetStreak();
+                    sendResponse({ success: true, streak: resetStreak });
+                    break;
 
-            case 'toggleExtension':
-                const enabled = request.enabled;
-                await chrome.storage.local.set({ extension_enabled: enabled });
+                case 'toggleExtension':
+                    const enabled = request.enabled;
+                    await chrome.storage.local.set({ extension_enabled: enabled });
 
-                if (enabled) {
-                    // Enable blocking rules
-                    await chrome.declarativeNetRequest.updateEnabledRulesets({
-                        enableRulesetIds: ['mindful_blocking_rules']
-                    });
-                } else {
-                    // Disable blocking rules
-                    await chrome.declarativeNetRequest.updateEnabledRulesets({
-                        disableRulesetIds: ['mindful_blocking_rules']
-                    });
-                }
+                    if (enabled) {
+                        await chrome.declarativeNetRequest.updateEnabledRulesets({
+                            enableRulesetIds: ['mindful_blocking_rules']
+                        });
+                    } else {
+                        await chrome.declarativeNetRequest.updateEnabledRulesets({
+                            disableRulesetIds: ['mindful_blocking_rules']
+                        });
+                    }
 
-                sendResponse({ success: true, enabled });
-                break;
+                    sendResponse({ success: true, enabled });
+                    break;
 
-            case 'getSettings':
-                const settings = await chrome.storage.local.get([
-                    'extension_enabled',
-                    'first_install',
-                    'install_date'
-                ]);
-                sendResponse({ success: true, settings });
-                break;
+                case 'getSettings':
+                    const settings = await chrome.storage.local.get([
+                        'extension_enabled',
+                        'first_install',
+                        'install_date'
+                    ]);
+                    sendResponse({ success: true, settings });
+                    break;
 
-            default:
-                sendResponse({ success: false, error: 'Unknown action' });
+                default:
+                    sendResponse({ success: false, error: 'Unknown action' });
+            }
+        } catch (error) {
+            console.error('Background script error:', error);
+            sendResponse({ success: false, error: error.message });
         }
-    } catch (error) {
-        console.error('Background script error:', error);
-        sendResponse({ success: false, error: error.message });
-    }
+    })();
 
     return true; // Keep message channel open for async response
 });
@@ -148,9 +146,9 @@ chrome.alarms.create('daily_streak_check', {
     periodInMinutes: 60 * 24 // Check daily
 });
 
-chrome.alarms.onAlarm.addListener(async (alarm) => {
+chrome.alarms.onAlarm.addListener((alarm) => {
     if (alarm.name === 'daily_streak_check') {
-        await streakManager.updateStreak();
+        streakManager.updateStreak().catch(console.error);
     }
 });
 
@@ -165,8 +163,7 @@ chrome.runtime.onStartup.addListener(() => {
 
 chrome.contextMenus.onClicked.addListener((info, tab) => {
     if (info.menuItemId === 'mindful_browsing_menu') {
-        chrome.action.openPopup();
-    }
+        chrome.tabs.create({ url: 'popup.html' });    }
 });
 
 console.log('Mindful Browsing background script loaded');
