@@ -53,3 +53,81 @@
         </div>
         <button class="new-quote-btn" id="newQuoteBtn">
             <span>🔄</span> New Quote
+        </button>
+    </div>
+
+    <!-- Quick Actions -->
+    <div class="actions-section">
+        <div class="action-buttons">
+            <button class="action-btn meditation-btn" id="meditationBtn">
+                <span class="btn-icon">🧘‍♀️</span>
+                <span class="btn-text">1-Min Meditation</span>
+            </button>
+            <button class="action-btn breathing-btn" id="breathingBtn">
+                <span class="btn-icon">🌬️</span>
+                <span class="btn-text">Breathing Exercise</span>
+            </button>
+        </div>
+    </div>
+
+    <!-- Stats -->
+    <div class="stats-section">
+        <div class="stat-item">
+            <div class="stat-value" id="totalBlocks">0</div>
+            <div class="stat-label">Sites Blocked Today</div>
+        </div>
+        <div class="stat-item">
+            <div class="stat-value" id="timesSaved">0</div>
+            <div class="stat-label">Minutes Saved</div>
+        </div>
+    </div>
+
+    <!-- Settings -->
+    <div class="settings-section">
+        <button class="settings-btn" id="settingsBtn">
+            <span>⚙️</span> Settings
+        </button>
+        <button class="reset-btn" id="resetBtn">
+            <span>🔄</span> Reset Streak
+        </button>
+    </div>
+
+    <!-- Footer -->
+    <div class="footer">
+        <p>Building healthier digital habits ✨</p>
+    </div>
+</div>
+
+<!-- Breathing Exercise Modal -->
+<div class="modal" id="breathingModal">
+    <div class="modal-content">
+        <span class="close-btn" id="closeBreathing">&times;</span>
+        <h3>Breathing Exercise</h3>
+        <div class="breathing-container">
+            <div class="breathing-circle" id="breathingCircle"></div>
+            <div class="breathing-text" id="breathingText">Get Ready</div>
+            <div class="breathing-count" id="breathingCount">3</div>
+        </div>
+        <button class="start-breathing-btn" id="startBreathingBtn">Start</button>
+    </div>
+</div>
+
+<!-- Meditation Modal -->
+<div class="modal" id="meditationModal">
+    <div class="modal-content">
+        <span class="close-btn" id="closeMeditation">&times;</span>
+        <h3>1-Minute Meditation</h3>
+        <div class="meditation-container">
+            <div class="meditation-timer" id="meditationTimer">1:00</div>
+            <div class="meditation-text" id="meditationText">Focus on your breath</div>
+            <div class="meditation-progress">
+                <div class="meditation-progress-bar" id="meditationProgress"></div>
+            </div>
+        </div>
+        <button class="start-meditation-btn" id="startMeditationBtn">Start</button>
+    </div>
+</div>
+
+<script src="popup.js"></script>
+</body>
+</html>
