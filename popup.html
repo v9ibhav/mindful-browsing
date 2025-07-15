@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mindful Browsing</title>
+    <link rel="stylesheet" href="popup.css">
+</head>
+<body>
+<div class="popup-container">
+    <!-- Header -->
+    <div class="header">
+        <div class="logo">
+            <span class="logo-icon">🧘</span>
+            <h1>Mindful Browsing</h1>
+        </div>
+        <div class="toggle-container">
+            <label class="toggle-switch">
+                <input type="checkbox" id="extensionToggle" checked>
+                <span class="slider"></span>
+            </label>
+        </div>
+    </div>
+
+    <!-- Streak Display -->
+    <div class="streak-section">
+        <div class="streak-display">
+            <div class="fire-icon">🔥</div>
+            <div class="streak-info">
+                <div class="streak-count" id="streakCount">0</div>
+                <div class="streak-label">Day Streak</div>
+            </div>
+        </div>
+        <div class="streak-progress">
+            <div class="progress-bar">
+                <div class="progress-fill" id="progressFill"></div>
+            </div>
+            <div class="progress-text">Keep going! 💪</div>
+        </div>
+    </div>
+
+    <!-- Daily Quote -->
+    <div class="quote-section">
+        <div class="quote-header">
+            <span class="quote-icon">✨</span>
+            <h3>Today's Mindful Moment</h3>
+        </div>
+        <div class="quote-content">
+            <blockquote id="dailyQuote">
+                "The present moment is the only time over which we have dominion."
+            </blockquote>
+            <cite id="quoteAuthor">- Thich Nhat Hanh</cite>
+        </div>
+        <button class="new-quote-btn" id="newQuoteBtn">
+            <span>🔄</span> New Quote
